@@ -1,0 +1,33 @@
+{
+  "name": "sign-firebase",
+  "version": "1.0.0",
+  "description": "modul firebase untuk project SIGN",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
+    "multer": "^1.4.2",
+    "puppeteer": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TaufiqOdhi/SIGN.git"
+  },
+  "keywords": [
+    "SIGN",
+    "game",
+    "biologi"
+  ],
+  "author": "Taufiq Odhi Dwi Putra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TaufiqOdhi/SIGN/issues"
+  },
+  "homepage": "https://github.com/TaufiqOdhi/SIGN#readme"
+}
