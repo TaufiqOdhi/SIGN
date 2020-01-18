@@ -16,7 +16,7 @@
     .timescore{
       position: absolute;
       top: 643px;
-      left: 500px;
+      left: 510px;
       font-family: arial;
       font-size: 24pt;
       color: black;
@@ -25,7 +25,7 @@
       position: absolute;
       color: black;
       top: 678px;
-      left: 500px;
+      left: 510px;
       font-family: arial;
       font-size: 24pt;
       color: black;
@@ -35,14 +35,14 @@
   </head>
   <body>
     <img src="images/sertif.png" alt="Sertifikat Game SIGN" style="width:1123px;height:764px">
-    <div id="tf-nama" class="nama">
-      Tomioka Giyu
-    </div>
-    <div id="tf-timescore" class="timescore">
-      100
-    </div>
-    <div id="tf-finishscore" class="finishscore">
-      100
-    </div>
+    <div id="tf-nama" class="nama"></div>
+    <div id="tf-timescore" class="timescore"></div>
+    <div id="tf-finishscore" class="finishscore"></div>
+    <script type="text/javascript">
+      var urlParams = new URLSearchParams(location.search);
+      document.getElementById('tf-nama').innerHTML = urlParams.get('nama');
+      document.getElementById('tf-timescore').innerHTML = urlParams.get('timescore');
+      document.getElementById('tf-finishscore').innerHTML = urlParams.get('finishscore');
+    </script>
   </body>
 </html>
