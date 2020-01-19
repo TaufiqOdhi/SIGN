@@ -10,6 +10,7 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 var app = express();
+var username;
 var nama;
 var timescore;
 var finishscore;
@@ -17,6 +18,7 @@ var finishscore;
 //Untuk retrieve data dari database berdasarkan username yang diinputkan
 app.use(express.static('public'));
 app.get('/', function(req, res){
+  username = req.query.username;
   res.redirect('/readDatabase');
 });
 
@@ -29,16 +31,20 @@ app.get('/showPDF', function(req, res){
   res.sendFile(__dirname+"/sertif/"+nama+".pdf");
 });
 
+//read firebase realtime database
 app.get('/readDatabase', async (req, res) => {
   try{
-    //nama = "Hinata Shoyo";
-    var ref = firebase.database().ref('playerDB/suzune');
-    var snapshot = await ref.once('value');
-    nama = snapshot.val().nama.toUpperCase();
-    timescore = 500;
-    finishscore = 670;
+    var ref = firebase.database().ref('playerDB').child(username);
+    var snapshotNama = await ref.child('nama').once('value');
+    var snapshotScore = await ref.child('scores').limitToLast(1).once('value');
+    nama = snapshotNama.val().toUpperCase();
+    snapshotScore.forEach(function(child){
+      timescore = child.val().timescore;
+      finishscore = child.val().finishscore;
+    });
   } catch(error) {
-    return res.send(error);
+    console.error(error);
+    return res.status(500).send(error);
   }
   return res.redirect('/generate');
 });
