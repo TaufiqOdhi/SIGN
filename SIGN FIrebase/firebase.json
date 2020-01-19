@@ -5,4 +5,8 @@
   "storage": {
     "rules": "storage.rules"
   }
+  "hosting":{
+    "site": "http://localhost:8081/",
+    public: public,
+  }
 }
