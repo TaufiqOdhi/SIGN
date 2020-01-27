@@ -24,15 +24,3 @@ exports.addScore = functions.https.onRequest(async (req, res) =>{
   });
   res.end();
 });
-
-
-//Generate Sertifikat (menggunakan express)
-const express = require('express');
-const app = express();
-
-app.get('/', (req, res) => {
-  res.send('Hello World !');
-});
-
-// Expose Express API as a single Cloud Function:
-exports.widgets = functions.https.onRequest(app);

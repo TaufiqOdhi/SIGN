@@ -10,7 +10,7 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 var app = express();
-var username;
+var username = 'suzune';
 var nama;
 var timescore;
 var finishscore;
@@ -18,7 +18,7 @@ var finishscore;
 //Untuk retrieve data dari database berdasarkan username yang diinputkan
 app.use(express.static('public'));
 app.get('/', function(req, res){
-  username = req.query.username;
+  //username = req.query.username;
   res.redirect('/readDatabase');
 });
 
@@ -28,7 +28,7 @@ app.get('/sertif', function(req, res){
 });
 
 app.get('/showPDF', function(req, res){
-  res.sendFile(__dirname+"/sertif/"+nama+".pdf");
+  res.sendFile(__dirname+"/sertif/"+username+".pdf");
 });
 
 //read firebase realtime database
@@ -58,7 +58,7 @@ app.get('/generate', async (req, res)=>{
                   "&timescore="+timescore+"&finishscore="+finishscore);
     await page.emulateMedia('screen');
     await page.pdf({
-      path: 'sertif/'+nama+'.pdf',
+      path: 'sertif/'+username+'.pdf',
       format: 'A4',
       printBackground: true,
       landscape: true
@@ -72,8 +72,7 @@ app.get('/generate', async (req, res)=>{
   return res.redirect('/showPDF');
 });
 
-var server = app.listen(8081, function() {
-  var host = server.address().address
+var server = app.listen(process.env.PORT || 8081, function() {
   var port = server.address().port
-  console.log("Example app listening at http://localhost", host, port)
+  console.log("Your app listening at http://localhost:",port)
 });
