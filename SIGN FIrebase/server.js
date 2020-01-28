@@ -18,7 +18,7 @@ var finishscore;
 //Untuk retrieve data dari database berdasarkan username yang diinputkan
 app.use(express.static('public'));
 app.get('/', function(req, res){
-  //username = req.query.username;
+  username = req.query.username;
   res.redirect('/readDatabase');
 });
 
