@@ -10,7 +10,7 @@ var firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 var app = express();
-var username = 'suzune';
+var username;
 var nama;
 var timescore;
 var finishscore;
