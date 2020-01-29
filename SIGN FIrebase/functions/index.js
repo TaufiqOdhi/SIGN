@@ -33,5 +33,12 @@ exports.addScore = functions.https.onRequest(async (req, res) =>{
 //untuk fetch semua data user
 exports.getData = functions.https.onRequest(async (req, res)=>{
   const snapshot = await admin.database().ref('playerDB').once('value');
-  res.json([snapshot.val()]);
+  var returnArrJson = [];
+  snapshot.forEach(function(child){
+    var item = child.val();
+    item.key = child.key;
+
+    returnArrJson.push(item);
+  })
+  res.json(returnArrJson);
 });
