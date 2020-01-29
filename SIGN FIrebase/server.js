@@ -3,6 +3,7 @@ var firebase = require('firebase/app');
 require('firebase/database');
 const puppeteer = require('puppeteer');
 const fs = require('fs-extra');
+const pretty = require('express-prettify')
 
 var firebaseConfig = {
   projectId: 'sign-e15cc',
@@ -17,6 +18,7 @@ var finishscore;
 
 //Untuk retrieve data dari database berdasarkan username yang diinputkan
 app.use(express.static('public'));
+app.use(pretty({ query: 'pretty'}));
 app.get('/', function(req, res){
   username = req.query.username;
   res.redirect('/readDatabase');
@@ -70,6 +72,22 @@ app.get('/generate', async (req, res)=>{
     return res.status(500).send(error);
   }
   return res.redirect('/showPDF');
+});
+
+app.get('/getData', async (req, res)=>{
+  try{
+    var ref = firebase.database().ref('playerDB');
+    var snapshot = await ref.once('value');
+    var arrJson = [];
+    await snapshot.forEach(function(child){
+        var item = child.val();
+        arrJson.push(item);
+    });
+  } catch(error){
+    console.error(error);
+    return res.status(500).send(error);
+  }
+  return res.json(arrJson);
 });
 
 var server = app.listen(process.env.PORT || 8081, function() {
