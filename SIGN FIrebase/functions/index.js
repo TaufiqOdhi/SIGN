@@ -22,7 +22,7 @@ exports.addScore = functions.https.onRequest(async (req, res) =>{
   const username = req.query.username;
   const timescore = req.query.timescore;
   const finishscore = req.query.finishscore;
-  const snapshot = await admin.database().ref('playerDB').child(username).child('scores').push({
+  const snapshot = await admin.database().ref('playerScores').child(username).push({
     timescore: timescore,
     finishscore: finishscore
   });

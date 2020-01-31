@@ -79,9 +79,26 @@ app.get('/getData', async (req, res)=>{
     var ref = firebase.database().ref('playerDB');
     var snapshot = await ref.once('value');
     var arrJson = [];
+
+    //menjadikan array JSON
     await snapshot.forEach(function(child){
+        var scores = [];
+        var timescoreSnap;
+        var finishscoreSnap;
         var item = child.val();
         item.username = child.key;
+        child.forEach(function(child2){
+          if(child2.key == 'scores'){
+            child2.forEach(function(child3){
+              timescoreSnap = child3.val().timescore;
+              finishscoreSnap = child3.val().finishscore;
+              scores.push(child3.val());
+            });
+          };
+        });
+        item.scores = scores;
+        item.finishscore = finishscoreSnap;
+        item.timescore = timescoreSnap;
         arrJson.push(item);
     });
   } catch(error){
