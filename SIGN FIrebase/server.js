@@ -36,9 +36,10 @@ app.get('/showPDF', function(req, res){
 //read firebase realtime database
 app.get('/readDatabase', async (req, res) => {
   try{
-    var ref = firebase.database().ref('playerDB').child(username);
-    var snapshotNama = await ref.child('nama').once('value');
-    var snapshotScore = await ref.child('scores').limitToLast(1).once('value');
+    var snapshotNama = await firebase.database().ref('playerDB').child(username)
+                              .child('nama').once('value');
+    var snapshotScore = await firebase.database().ref('playerScores').child(username)
+                              .limitToLast(1).once('value');
     nama = snapshotNama.val().toUpperCase();
     snapshotScore.forEach(function(child){
       timescore = child.val().timescore;
@@ -74,31 +75,52 @@ app.get('/generate', async (req, res)=>{
   return res.redirect('/showPDF');
 });
 
+app.get('/getScores', async (req, res)=>{
+  try{
+    var snapshot = await firebase.database().ref('playerScores').
+          child(req.query.username).once('value');
+    var arrJson = [];
+    var i = 1;
+
+    //menjadikan array json
+    await snapshot.forEach(function(child){
+        var item = child.val();
+        item.no = i;
+        i++;
+        arrJson.push(item);
+    });
+  } catch(error){
+    console.error(error);
+    return res.status(500).send(error);
+  }
+  res.header("Access-Control-Allow-Origin", "*");
+  return res.json(arrJson);
+});
+
 app.get('/getData', async (req, res)=>{
   try{
-    var ref = firebase.database().ref('playerDB');
-    var snapshot = await ref.once('value');
+    var snapshot = await firebase.database().ref('playerDB').once('value');
     var arrJson = [];
 
     //menjadikan array JSON
     await snapshot.forEach(function(child){
-        var scores = [];
-        var timescoreSnap;
-        var finishscoreSnap;
+        // var finishscoreSnap;
+        // var timescoreSnap;
         var item = child.val();
         item.username = child.key;
-        child.forEach(function(child2){
-          if(child2.key == 'scores'){
-            child2.forEach(function(child3){
-              timescoreSnap = child3.val().timescore;
-              finishscoreSnap = child3.val().finishscore;
-              scores.push(child3.val());
-            });
-          };
-        });
-        item.scores = scores;
-        item.finishscore = finishscoreSnap;
-        item.timescore = timescoreSnap;
+        var scoreRef = firebase.database().ref('playerScores');
+        scoreRef.child(child.key).limitToLast(1).on('value', function(snap){
+              snap.forEach(function(cSnap){
+                  item.timescore  = cSnap.val().timescore;
+                  item.finishscore = cSnap.val().finishscore;
+              });
+          }, function (errorObject) {
+              console.log("The read failed: " + errorObject.code);
+          });
+          if(item.timescore == undefined){
+            res.header("Access-Control-Allow-Origin", "*");
+            res.redirect('/getData?pretty');
+          }
         arrJson.push(item);
     });
   } catch(error){
