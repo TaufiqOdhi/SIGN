@@ -1,0 +1,62 @@
+[
+  {
+    "asalSekolah": "dummy",
+    "nama": "Horikita Manabu",
+    "scores": {
+      "-LyyhCz70SNmG9q-WkJc": {
+        "finishscore": "750",
+        "timescore": "950"
+      },
+      "-LyyhFcsj1XOZ6P9kAPi": {
+        "finishscore": "70",
+        "timescore": "90"
+      }
+    },
+    "username": "manabu"
+  },
+  {
+    "asalSekolah": "dummy",
+    "nama": "Minako Yuki",
+    "scores": {
+      "-Lzh7L7IuSsV6wDF-o_k": {
+        "finishscore": "500",
+        "timescore": "500"
+      },
+      "-Lzh7N4jcknE4irE6mXH": {
+        "finishscore": "700",
+        "timescore": "700"
+      }
+    },
+    "username": "minako"
+  },
+  {
+    "asalSekolah": "dummy",
+    "nama": "Horikita Suzune",
+    "scores": {
+      "-LzgbeLr5Plpcc_Ox3o4": {
+        "finishscore": "950",
+        "timescore": "900"
+      },
+      "-LzgbsoHao0RL3WZZHAh": {
+        "finishscore": "900",
+        "timescore": "800"
+      }
+    },
+    "username": "suzune"
+  },
+  {
+    "asalSekolah": "dummy",
+    "nama": "Kamado Tanjiro",
+    "scores": {
+      "-LzgbiToQx93PDAwypR5": {
+        "finishscore": "90",
+        "timescore": "10"
+      },
+      "-LzgboG8IKbAI4AmFqes": {
+        "finishscore": "100",
+        "timescore": "80"
+      }
+    },
+    "username": "tanjiro"
+  }
+]
