@@ -3,7 +3,7 @@ var firebase = require('firebase/app');
 require('firebase/database');
 const puppeteer = require('puppeteer');
 const fs = require('fs-extra');
-const pretty = require('express-prettify')
+const pretty = require('express-prettify');
 
 var firebaseConfig = {
   projectId: 'sign-e15cc',
@@ -81,12 +81,14 @@ app.get('/getData', async (req, res)=>{
     var arrJson = [];
     await snapshot.forEach(function(child){
         var item = child.val();
+        item.username = child.key;
         arrJson.push(item);
     });
   } catch(error){
     console.error(error);
     return res.status(500).send(error);
   }
+  res.header("Access-Control-Allow-Origin", "*");
   return res.json(arrJson);
 });
 

@@ -11,7 +11,6 @@ exports.addUser = functions.https.onRequest(async (req, res) =>{
   const nama = req.query.nama;
   const asalSekolah = req.query.asalSekolah;
   const snapshot = await admin.database().ref('playerDB').child(username).set({
-      username: username,
       nama: nama,
       asalSekolah: asalSekolah
   });
@@ -29,16 +28,3 @@ exports.addScore = functions.https.onRequest(async (req, res) =>{
   });
   res.end();
 });
-
-//untuk fetch semua data user
-// exports.getData = functions.https.onRequest(async (req, res)=>{
-//   const snapshot = await admin.database().ref('playerDB').once('value');
-//   var returnArrJson = [];
-//   snapshot.forEach(function(child){
-//     var item = child.val();
-//     item.key = child.key;
-//
-//     returnArrJson.push(item);
-//   })
-//   res.json(returnArrJson);
-// });
