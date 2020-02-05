@@ -79,14 +79,6 @@ app.get('/generate', async (req, res)=>{
   try{
     const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
     const page = await browser.newPage();
-    //
-    // var string = nama.split(" ");
-    // var stringEdit, i;
-    // stringEdit = string[0];
-    // for(i=1; i<string.length; i++){
-    //   stringEdit += "%20" + string[i];
-    // }
-
     await page.goto("http://localhost:8080/sertif?nama="+nama+
                   "&timescore="+timescore+"&finishscore="+finishscore);
     await page.emulateMedia('screen');
@@ -97,7 +89,8 @@ app.get('/generate', async (req, res)=>{
     });
     console.log('done');
     res.set("Content-Type", "application/pdf");
-    return res.status(200).send(pdfBuffer);
+    await browser.close();
+    res.status(200).send(pdfBuffer);
   } catch(error){
     console.error(error);
     return res.status(500).send(error);
