@@ -50,7 +50,7 @@ function Tables() {
             <StyledTableCell align="center">Asal Sekolah</StyledTableCell>
             <StyledTableCell align="center">Finish Score</StyledTableCell>
             <StyledTableCell align="center">TimeScore</StyledTableCell>
-            <StyledTableCell align="center">Detail</StyledTableCell>
+            <StyledTableCell align="center">Detail Score</StyledTableCell>
             <StyledTableCell align="center">Certificate</StyledTableCell>
           </TableRow>
         </TableHead>
@@ -69,7 +69,7 @@ function Tables() {
                     <StyledTableCell align="left">{row.asalSekolah}</StyledTableCell>
                     <StyledTableCell align="center">{row.finishscore}</StyledTableCell>
                     <StyledTableCell align="center">{row.timescore}</StyledTableCell>
-                    <StyledTableCell align="center"><Link href={'/detail?username='+row.username}><Button>Detail</Button></Link></StyledTableCell>
+                    <StyledTableCell align="center"><Link href={'/detail?username='+row.username}><Button>Detail Score</Button></Link></StyledTableCell>
                     <StyledTableCell align="center"><Link href={'https://us-central1-sign-e15cc.cloudfunctions.net/server?username='+row.username} target="_blank"><Button color="primary">Open</Button></Link></StyledTableCell>
                     </StyledTableRow>
                   ))}
