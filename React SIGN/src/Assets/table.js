@@ -36,7 +36,7 @@ const useStyles = makeStyles({
 });
 
 const loadData = () =>//disesuaikan dengan link API
-    fetch("http://localhost:8081/getData?pretty").then(res => res.json())
+    fetch("https://us-central1-sign-e15cc.cloudfunctions.net/server/getData").then(res => res.json())
 
 function Tables() {
   const classes = useStyles();
@@ -70,7 +70,7 @@ function Tables() {
                     <StyledTableCell align="center">{row.finishscore}</StyledTableCell>
                     <StyledTableCell align="center">{row.timescore}</StyledTableCell>
                     <StyledTableCell align="center"><Link href={'/detail?username='+row.username}><Button>Detail</Button></Link></StyledTableCell>
-                    <StyledTableCell align="center"><Link href={'http://localhost:8081/?username='+row.username} target="_blank"><Button color="primary">Open</Button></Link></StyledTableCell>
+                    <StyledTableCell align="center"><Link href={'https://us-central1-sign-e15cc.cloudfunctions.net/server?username='+row.username} target="_blank"><Button color="primary">Open</Button></Link></StyledTableCell>
                     </StyledTableRow>
                   ))}
                   </TableBody>

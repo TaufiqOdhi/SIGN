@@ -29,8 +29,8 @@ const StyledTableRow = withStyles(theme => ({
 
 const params = window.location.href;
 //disesuaikan denagn link aplikasi
-var username = params.split("http://localhost:3000/detail?username=");
-var APILink = 'http://localhost:8081/getScores?username='+username[1];
+var username = params.split("https://sign-e15cc.firebaseapp.com/detail?username=");
+var APILink = 'https://us-central1-sign-e15cc.cloudfunctions.net/server/getScores?username='+username[1];
 
 const rows = () =>//disesuaikan denagn link API
     fetch(APILink).then(res => res.json())
