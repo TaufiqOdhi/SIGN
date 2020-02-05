@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <style media="screen">
+    .nama{
+      width: 1123px;
+      position: absolute;
+      top: 510px;
+      left: 37px;
+      font-family: arial;
+      font-size: 40pt;
+      text-align: center;
+      color: #7995AA;
+    }
+    .timescore{
+      position: absolute;
+      top: 670px;
+      left: 510px;
+      font-family: arial;
+      font-size: 24pt;
+      color: black;
+    }
+    .finishscore{
+      position: absolute;
+      color: black;
+      top: 705px;
+      left: 510px;
+      font-family: arial;
+      font-size: 24pt;
+      color: black;
+    }
+    </style>
+    <title></title>
+  </head>
+  <body>
+    <img src="images/sertif.png" alt="Sertifikat Game SIGN" style="width:1135px;height:795px">
+    <div id="tf-nama" class="nama"></div>
+    <div id="tf-timescore" class="timescore"></div>
+    <div id="tf-finishscore" class="finishscore"></div>
+    <script type="text/javascript">
+      var urlParams = new URLSearchParams(location.search);
+      document.getElementById('tf-nama').innerHTML = urlParams.get('nama');
+      document.getElementById('tf-timescore').innerHTML = urlParams.get('timescore');
+      document.getElementById('tf-finishscore').innerHTML = urlParams.get('finishscore');
+    </script>
+  </body>
+</html>

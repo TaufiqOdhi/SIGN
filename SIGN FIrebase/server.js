@@ -117,10 +117,6 @@ app.get('/getData', async (req, res)=>{
           }, function (errorObject) {
               console.log("The read failed: " + errorObject.code);
           });
-          if(item.timescore == undefined){
-            res.header("Access-Control-Allow-Origin", "*");
-            res.redirect('/getData?pretty');
-          }
         arrJson.push(item);
     });
   } catch(error){
@@ -128,6 +124,9 @@ app.get('/getData', async (req, res)=>{
     return res.status(500).send(error);
   }
   res.header("Access-Control-Allow-Origin", "*");
+  if(arrJson[0].timescore == undefined){
+    return res.redirect('/getData?pretty');
+  }
   return res.json(arrJson);
 });
 
